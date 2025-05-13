@@ -56,10 +56,9 @@ const pool = new Pool(
 
 // Middlewares for CORS, logging and JSON parsing
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:3000"], // Add frontend local dev server and any production URLs
+  origin: ["http://localhost:5173", "http://localhost:3000", "https://project-management-software-rs3uco.fly.dev"], // Allow local dev and production URLs
   credentials: true
-}));
-app.use(morgan("combined"));
+}));app.use(morgan("combined"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // JWT Secret configuration (default if not provided)
@@ -610,6 +609,6 @@ io.on("connection", (socket) => {
 
 // ===== Start the Server =====
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
 });
